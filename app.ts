@@ -7,10 +7,11 @@ const app = new Application();
 const router = new Router();
 const port: number = 8080;
 
+// routes
 app.use(todoRouter.routes());
 app.use(userRouter.routes());
-
 app.use(todoRouter.allowedMethods());
+app.use(userRouter.allowedMethods());
 app.use(oakCors({ origin: "*" }));
 
 // app.addEventListener("listen", ({ secure, hostname, port }) => {
