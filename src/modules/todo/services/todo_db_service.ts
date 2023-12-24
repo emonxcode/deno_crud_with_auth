@@ -1,5 +1,5 @@
-import dbClient from "../config/db.ts";
-import Todo from "../models/todo.ts";
+import dbClient from "../../../config/db.ts";
+import Todo from "../model/todo.ts";
 
 export default {
     findAll: async () => {

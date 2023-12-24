@@ -1,5 +1,5 @@
-import dbClient from "../config/db.ts";
-import User from "../models/user.ts";
+import dbClient from "../../../config/db.ts";
+import User from "../model/user.ts";
 
 export default {
     findAll: async () => {

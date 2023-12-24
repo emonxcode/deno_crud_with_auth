@@ -1,8 +1,8 @@
-import UserService from "../services/user_db_service.ts";
-import User from "../models/user.ts";
+import UserService from "../service/user_db_service.ts";
+import User from "../model/user.ts";
 import * as bcrypt from "https://deno.land/x/bcrypt/mod.ts";
 import { create } from "https://deno.land/x/djwt@v2.4/mod.ts";
-import { key } from "../utils/key.ts";
+import { key } from "../../../utils/key.ts";
 
 export default {
     getAll: async ({ response}: {response: any}) => {

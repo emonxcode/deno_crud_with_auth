@@ -1,7 +1,7 @@
 import { Application, Router } from "https://deno.land/x/oak/mod.ts";
 import { oakCors } from "https://deno.land/x/cors/mod.ts";
-import todoRouter from "./src/routes/todo.routes.ts";
-import userRouter from "./src/routes/user.routes.ts";
+import todoRouter from "./src/modules/todo/routes/todo.routes.ts";
+import userRouter from "./src/modules/user/routes/user.routes.ts";
 
 const app = new Application();
 const router = new Router();

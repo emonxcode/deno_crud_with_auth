@@ -1,5 +1,5 @@
 import TodoService from "../services/todo_db_service.ts";
-import Todo from "../models/todo.ts";
+import Todo from "../model/todo.ts";
 
 export default {
     getAll: async ({response}: {response: any}) => {
