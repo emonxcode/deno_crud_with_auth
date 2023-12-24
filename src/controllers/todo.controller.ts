@@ -1,6 +1,5 @@
-import todos from "../data/todo.ts";
-// import iTodo from "../data/todo.ts"
-import Todo from "../data/todo-dto.ts";
+import todos from "../services/todo_db_service.ts";
+import Todo from "../models/todo.ts";
 
 export default {
     getAll: async ({response}: {response: any}) => {
@@ -12,6 +11,7 @@ export default {
     getByID: async ({response, params}: {response: any, params: {id: string}}) => {
         const todoByID = await todos.findByID(params.id);
         console.log(todoByID);
+        if(todoByID)
         response.status = 200;
         response.body = todoByID;
     },
@@ -23,23 +23,28 @@ export default {
     createTodo: async ({ request, response }: { request: any; response: any }) => {
         const body = await request.body({ type: 'json' });
         const requestBody = await body.value;
-        console.log(requestBody.task);
+        console.log(requestBody.todo);
         let newTodo: Todo = {
-            task: requestBody.task
+            id: 0,
+            todo:  requestBody.todo,
+            status: 0
         };
         console.log(newTodo);
         await todos.create(newTodo);
         response.status = 200;
+        response.body = { message: "Todo created" };
     },
-    updateByID: async ({params, response, request}: {params:{id:string}, request:any, response:any}) => {
+    updateByID: async ({params, response, request}: {params:{id:number}, request:any, response:any}) => {
         const body = await request.body({ type: 'json' });
         const requestBody = await body.value;
+        console.log(requestBody);
+        console.log("--------");
         if (params.id == null) {
             response.body = {
                 message: "no id selected"
             };
             response.status = 404;
-        } else if (requestBody.task == null || requestBody.done == null) {
+        } else if (requestBody.todo == null || requestBody.status == null) {
             response.body = {
                 message: "body request can't be empty"
             };
@@ -47,12 +52,13 @@ export default {
         } else {
             let newTodo: Todo = {
                 id: params.id,
-                task: requestBody.task,
-                done: requestBody.done
+                status: requestBody.status,
+                todo: requestBody.todo
             };
             console.log(newTodo);
             await todos.updateByID(newTodo);
             response.status = 200;
+            response.body = { message: "Todo updated" };
         }
     }   
 };

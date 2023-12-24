@@ -1,5 +1,5 @@
-import dbClient from "../db.ts";
-import Todo from "../data/todo-dto.ts";
+import dbClient from "../config/db.ts";
+import Todo from "../models/todo.ts";
 
 export default {
     findAll: async () => {
@@ -15,13 +15,13 @@ export default {
         return null;
     },
     create: async (data: Todo) => {
-        await dbClient.query("insert into todos(task) values (?)", [data.task]);
+        await dbClient.query("insert into todos(todo) values (?)", [data.todo]);
         return null;
     },
     updateByID: async (data:Todo) => {
         const getData = await dbClient.query("select * from todos where id",[data.id]);
         if (getData != null) {
-            await dbClient.query(`update todos set task = '${data.task}', done = ${data.done} where id = ${data.id}`);
+            await dbClient.query(`update todos set todo = '${data.todo}', done = ${data.status} where id = ${data.id}`);
             return null
         } else {
             return "no match data had been found"
