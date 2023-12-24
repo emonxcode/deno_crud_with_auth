@@ -1,4 +1,4 @@
-import Users from "../services/user_db_service.ts";
+import UserService from "../services/user_db_service.ts";
 import User from "../models/user.ts";
 import * as bcrypt from "https://deno.land/x/bcrypt/mod.ts";
 import { create } from "https://deno.land/x/djwt@v2.4/mod.ts";
@@ -6,13 +6,13 @@ import { key } from "../utils/key.ts";
 
 export default {
     getAll: async ({ response}: {response: any}) => {
-        const User = await Users.findAll();
+        const User = await UserService.findAll();
         console.log(User);
         response.status = 200;
         response.body = User;
     },
     getByID: async ({response, params}: {response: any, params: {id: string}}) => {
-        const UserByID = await Users.findByID(params.id);
+        const UserByID = await UserService.findByID(params.id);
         console.log(UserByID);
         if(UserByID)
         response.status = 200;
@@ -20,7 +20,7 @@ export default {
     },
    
     deleteByID: async ({ response, params }: { response: any, params: { id: string } }) => {
-        const UserByID = await Users.deleteByID(params.id);
+        const UserByID = await UserService.deleteByID(params.id);
         console.log(UserByID);
         response.status = 200;
     },
@@ -42,7 +42,7 @@ export default {
             password: hashedPassword
         };
         console.log(newUser);
-        await Users.create(newUser);
+        await UserService.create(newUser);
         response.status = 200;
         response.body = { message: "User created" };
     },
@@ -54,7 +54,7 @@ export default {
 
         const { email, password } = requestBody;
    
-        const userByEmail = await Users.findByEmail(email);
+        const userByEmail = await UserService.findByEmail(email);
         
         console.log(userByEmail);
         if (!userByEmail) {
@@ -88,7 +88,7 @@ export default {
           }
 
     },
-    
+
     updateByID: async ({ params, response, request}: {params: any, request:any, response:any}) => {
         const body = await request.body({ type: 'json' });
         const requestBody = await body.value;
@@ -111,7 +111,7 @@ export default {
                 email: requestBody.email
             };
             console.log(newUser);
-            await Users.updateByID(newUser);
+            await UserService.updateByID(newUser);
             response.status = 200;
             response.body = { message: "User updated" };
         }

@@ -1,22 +1,22 @@
-import todos from "../services/todo_db_service.ts";
+import TodoService from "../services/todo_db_service.ts";
 import Todo from "../models/todo.ts";
 
 export default {
     getAll: async ({response}: {response: any}) => {
-        const todo = await todos.findAll();
+        const todo = await TodoService.findAll();
         console.log(todo);
         response.status = 200;
         response.body = todo;
     },
     getByID: async ({response, params}: {response: any, params: {id: string}}) => {
-        const todoByID = await todos.findByID(params.id);
+        const todoByID = await TodoService.findByID(params.id);
         console.log(todoByID);
         if(todoByID)
         response.status = 200;
         response.body = todoByID;
     },
     deleteByID: async ({ response, params }: { response: any, params: { id: string } }) => {
-        const todoByID = await todos.deleteByID(params.id);
+        const todoByID = await TodoService.deleteByID(params.id);
         console.log(todoByID);
         response.status = 200;
     },
@@ -30,7 +30,7 @@ export default {
             status: 0
         };
         console.log(newTodo);
-        await todos.create(newTodo);
+        await TodoService.create(newTodo);
         response.status = 200;
         response.body = { message: "Todo created" };
     },
@@ -56,7 +56,7 @@ export default {
                 todo: requestBody.todo
             };
             console.log(newTodo);
-            await todos.updateByID(newTodo);
+            await TodoService.updateByID(newTodo);
             response.status = 200;
             response.body = { message: "Todo updated" };
         }
