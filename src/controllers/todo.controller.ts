@@ -34,7 +34,7 @@ export default {
         response.status = 200;
         response.body = { message: "Todo created" };
     },
-    updateByID: async ({params, response, request}: {params:{id:number}, request:any, response:any}) => {
+    updateByID: async ({params, response, request}: {params: any, request:any, response:any}) => {
         const body = await request.body({ type: 'json' });
         const requestBody = await body.value;
         console.log(requestBody);
