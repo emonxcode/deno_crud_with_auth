@@ -1,5 +1,5 @@
 export default interface Todo{
-    id: number,
-    todo: string,
-    status: number
+    id?: number,
+    todo?: string,
+    status?: number
 }
