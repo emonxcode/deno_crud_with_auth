@@ -14,11 +14,11 @@ app.use(todoRouter.allowedMethods());
 app.use(userRouter.allowedMethods());
 app.use(oakCors({ origin: "*" }));
 
-// app.addEventListener("listen", ({ secure, hostname, port }) => {
-//     const protocol = secure ? "https://" : "http://";
-//     const url = `${protocol}${hostname ?? "localhost"}:${port}`;
-//     console.log(`Listening on: ${port}`);
-// });
+app.addEventListener("listen", ({ secure, hostname, port }) => {
+    const protocol = secure ? "https://" : "http://";
+    const url = `${protocol}${hostname ?? "localhost"}:${port}`;
+    console.log(`Listening on: ${port}`);
+});
 
 await app.listen({ port }).then(() => {
     console.log("Server running at port :" + port);
