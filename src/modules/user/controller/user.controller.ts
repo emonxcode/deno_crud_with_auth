@@ -62,8 +62,8 @@ export default {
     const userByEmail = await UserService.findByEmail(email);
 
     console.log(userByEmail);
-    if (!userByEmail) {
-      response.body = 404;
+    if (userByEmail.length === 0) {
+      response.status = 404;
       response.body = { message: `User of "${email}" not found` };
       return;
     }

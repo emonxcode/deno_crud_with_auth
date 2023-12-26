@@ -1,11 +1,12 @@
 import { Router } from "https://deno.land/x/oak/mod.ts";
 import todoController from "../controllers/todo.controller.ts";
+import { authourized } from "../../../middlewares/authentication.ts";
 
 const router = new Router();
-router.get('/todos', todoController.getAll)
-    .post("/todos", todoController.createTodo)
-    .get("/todos/:id", todoController.getByID)
-    .put("/todos/:id", todoController.updateByID)
-    .delete("/todos/:id", todoController.deleteByID);
+router.get("/todos", authourized, todoController.getAll)
+  .post("/todos", authourized, todoController.createTodo)
+  .get("/todos/:id", authourized, todoController.getByID)
+  .put("/todos/:id", authourized, todoController.updateByID)
+  .delete("/todos/:id", authourized, todoController.deleteByID);
 
 export default router;
