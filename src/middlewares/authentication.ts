@@ -23,6 +23,8 @@ export const authourized = async (ctx: Context, next: any) => {
     }
     await next();
   } catch (error) {
+    console.log("----------");
+    console.log(error);
     ctx.response.status = 401;
     ctx.response.body = {
       message: "You are not authorized to access this route",

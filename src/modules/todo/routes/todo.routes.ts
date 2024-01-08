@@ -1,6 +1,7 @@
-import { Router } from "https://deno.land/x/oak/mod.ts";
+import { Router } from "https://deno.land/x/oak@v12.6.1/mod.ts";
 import todoController from "../controllers/todo.controller.ts";
 import { authourized } from "../../../middlewares/authentication.ts";
+
 
 const router = new Router();
 router.get("/todos", authourized, todoController.getAll)

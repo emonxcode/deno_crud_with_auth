@@ -1,5 +1,6 @@
 import TodoService from "../services/todo_db_service.ts";
 import Todo from "../model/todo.ts";
+import singleUpload from "../../../middlewares/upload.ts";
 
 export default {
   getAll: async ({ response }: { response: any }) => {
@@ -54,6 +55,7 @@ export default {
     };
 
     console.log(newTodo);
+   // await singleUpload();
 
     let result = await TodoService.create(newTodo);
     console.log(result);

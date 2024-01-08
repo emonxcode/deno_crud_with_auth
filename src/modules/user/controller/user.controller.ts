@@ -8,7 +8,7 @@ export default {
   getAll: async ({ response }: { response: any }) => {
     const User = await UserService.findAll();
     console.log(User);
-    response.status = 200;
+    response.status = 200; 
     response.body = User;
   },
 
